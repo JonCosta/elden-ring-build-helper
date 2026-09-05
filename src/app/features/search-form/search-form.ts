@@ -1,15 +1,14 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Category } from '../../core/models/item-type';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatIconModule } from '@angular/material/icon';
-import { EldenRingService } from '../../core/services/service';
 import { debounceTime, distinctUntilChanged, Observable, of, Subject, switchMap, takeUntil } from 'rxjs';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Item } from '../../core/models/item';
 import { EldenRingFacade } from '../../core/services/facade';
+import { ItemsState } from '../../core/states/items';
 
 @Component({
   selector: 'app-search-form',
@@ -33,6 +32,7 @@ export class SearchForm implements OnInit {
 
   private destroy$ = new Subject<void>();
   private facade = inject(EldenRingFacade);
+  private readonly state = inject(ItemsState);
 
   constructor(private formBuilder: FormBuilder) { }
   
@@ -54,6 +54,10 @@ export class SearchForm implements OnInit {
         return this.facade.getItems(request);
       })
     )
+  }
+
+  public addItem(item: Item) {
+    this.state.add(item);
   }
 
   private initForm() {
