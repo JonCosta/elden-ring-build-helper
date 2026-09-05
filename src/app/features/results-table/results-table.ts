@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { Item } from '../../core/models/item';
 import { ItemsState } from '../../core/states/items';
@@ -13,7 +13,7 @@ import { ItemsState } from '../../core/states/items';
     templateUrl: './results-table.html',
     styleUrl: './results-table.scss',
 })
-export class ResultsTable implements OnInit {
+export class ResultsTable {
 
     @Input() items!: Item[];
 
@@ -21,11 +21,36 @@ export class ResultsTable implements OnInit {
 
     private readonly state = inject(ItemsState);
 
-    ngOnInit(): void {
+    get highestStr(): number {
+        return this.getMaxByAttribute('str');
+    }
 
+    get highestDex(): number {
+        return this.getMaxByAttribute('dex');
+    }
+
+    get highestInt(): number {
+        return this.getMaxByAttribute('int');
+    }
+
+    get highestFai(): number {
+        return this.getMaxByAttribute('fai');
+    }
+
+    get highestArc(): number {
+        return this.getMaxByAttribute('arc');
     }
 
     removeItem(item: Item) {
         this.state.remove(item);
+    }
+
+    private getMaxByAttribute(attribute: 'str' | 'dex' | 'int' | 'fai' | 'arc') {
+        let max = 0;
+        this.items.forEach(item => {
+            if (item.requirements[attribute] > max)
+                max = item.requirements[attribute];
+        });
+        return max;
     }
 }
