@@ -56,11 +56,12 @@ export class SearchForm implements OnInit {
     )
   }
 
-  public addItem(item: Item) {
+  public addItem(item: Item): void {
     this.state.add(item);
+    this.form.get('name')?.reset();
   }
 
-  private initForm() {
+  private initForm(): void {
     this.form = this.formBuilder.group({
       name: [],
       category: ['weapons']

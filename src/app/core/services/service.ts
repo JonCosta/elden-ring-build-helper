@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Item } from '../models/item';
+import { ApiResponse } from '../models/response';
 import { SearchRequest } from '../models/search';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class EldenRingService {
   private readonly eldenRingApiUrl = "https://eldenring.fanapis.com/api";
 
   public searchItemsByCategory(request: SearchRequest) {
-    return this.http.get<Item[]>(`${this.eldenRingApiUrl}/${request.category}?name=${request.name}`);
+    return this.http.get<ApiResponse>(`${this.eldenRingApiUrl}/${request.category}?name=${request.name}`);
   }
 
 }

@@ -1,12 +1,14 @@
-interface Attribute {
-    name: string;
-    amount: number;
+export interface ItemRequirements {
+    str: number,
+    dex: number,
+    fai: number,
+    int: number,
+    arc: number
 }
 
 export interface Item {
-    id: string;
-    name: string;
-    image: string;
-    requiredAttributes?: Attribute[];
-    requires?: Attribute[];
+    id: string,
+    name: string,
+    image: string,
+    requirements: ItemRequirements
 }

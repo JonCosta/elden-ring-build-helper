@@ -23,21 +23,19 @@ export class ItemsState {
         this._value$.next(value);
     }
 
-    add(item: Item) {
+    add(item: Item): void {
         console.log("Adding item: ", item);
-        let currentValue = this.value;
-        currentValue.push(item);
-        this.value = currentValue;
+        this.value = [...this.value, item];
         console.log("Current Value: ", this.value);
     }
 
-    remove(item: Item) {
+    remove(item: Item): void {
         let currentValue = this.value;
         currentValue = currentValue.filter(c => c.id != item.id);
         this.value = currentValue;
     }
 
-    reset() {
+    reset(): void {
         this._value = [];
         this._value$.next([]);
     }

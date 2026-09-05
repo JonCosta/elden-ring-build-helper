@@ -1,1 +1,34 @@
-<p>results-table works!</p>
+<table mat-table [dataSource]="items">
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let item"> {{item.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="str">
+        <th mat-header-cell *matHeaderCellDef> STR </th>
+        <td mat-cell *matCellDef="let item"> {{item.requirements.str}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dex">
+        <th mat-header-cell *matHeaderCellDef> DEX </th>
+        <td mat-cell *matCellDef="let item"> {{item.requirements.dex}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="int">
+        <th mat-header-cell *matHeaderCellDef> INT </th>
+        <td mat-cell *matCellDef="let item"> {{item.requirements.int}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fai">
+        <th mat-header-cell *matHeaderCellDef> FAI </th>
+        <td mat-cell *matCellDef="let item"> {{item.requirements.fai}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="arc">
+        <th mat-header-cell *matHeaderCellDef> ARC </th>
+        <td mat-cell *matCellDef="let item"> {{item.requirements.arc}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
