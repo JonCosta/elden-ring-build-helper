@@ -6,9 +6,10 @@
             placeholder="Type here to start searching"
             formControlName="name" 
             [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete">
+        <mat-autocomplete #auto="matAutocomplete"
+            (optionSelected)="handleSelectedOption($event)">
             @for (item of searchedItems$ | async; track item) {
-                <mat-option [value]="item.id" (click)="addItem(item)">
+                <mat-option [value]="item">
                     {{item.name}}
                 </mat-option>
             }
