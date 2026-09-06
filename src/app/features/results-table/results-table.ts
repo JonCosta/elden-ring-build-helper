@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { Item } from '../../core/models/item';
 import { ItemsState } from '../../core/states/items';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
     selector: 'app-results-table',
@@ -12,7 +13,8 @@ import { ItemsState } from '../../core/states/items';
         CommonModule,
         MatTableModule,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        MatTooltipModule
     ],
     templateUrl: './results-table.html',
     styleUrl: './results-table.scss',
@@ -21,7 +23,7 @@ export class ResultsTable {
 
     @Input() items!: Item[];
 
-    protected displayedColumns = ['name', 'str', 'dex', 'int', 'fai', 'arc', 'actions']
+    protected displayedColumns = [`pic`, 'name', 'str', 'dex', 'int', 'fai', 'arc', 'actions']
 
     private readonly state = inject(ItemsState);
 
