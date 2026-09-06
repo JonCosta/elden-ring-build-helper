@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { Item } from '../../core/models/item';
 import { ItemsState } from '../../core/states/items';
@@ -8,7 +10,9 @@ import { ItemsState } from '../../core/states/items';
     selector: 'app-results-table',
     imports: [
         CommonModule,
-        MatTableModule
+        MatTableModule,
+        MatButtonModule,
+        MatIconModule
     ],
     templateUrl: './results-table.html',
     styleUrl: './results-table.scss',
@@ -17,7 +21,7 @@ export class ResultsTable {
 
     @Input() items!: Item[];
 
-    protected displayedColumns = ['name', 'str', 'dex', 'int', 'fai', 'arc']
+    protected displayedColumns = ['name', 'str', 'dex', 'int', 'fai', 'arc', 'actions']
 
     private readonly state = inject(ItemsState);
 
@@ -41,7 +45,7 @@ export class ResultsTable {
         return this.getMaxByAttribute('arc');
     }
 
-    removeItem(item: Item) {
+    public removeItem(item: Item) {
         this.state.remove(item);
     }
 
